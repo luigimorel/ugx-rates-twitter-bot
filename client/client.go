@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
+	"github.com/go-co-op/gocron"
 	"github.com/joho/godotenv"
 	"github.com/morelmiles/ugx_rates/utils"
 )
@@ -19,6 +21,7 @@ func Config() {
 	}
 
 	fmt.Println("Starting Server")
+	scheduler := gocron.NewScheduler(time.UTC)
 
 	apiKey := os.Getenv("API_KEY")
 	apiKeySecret := os.Getenv("API_KEY_SECRET")
@@ -36,9 +39,11 @@ func Config() {
 		fmt.Printf("err : %v\n", err)
 	}
 
-	fmt.Printf("Account: @%s (%s)\n", user.ScreenName, user.ProfileBannerURL)
+	fmt.Printf("Account: @%s \n", user.ScreenName)
+	scheduler.Every(1).Day().At("11:00").Do(func() {
+		_, _, err = client.Statuses.Update(utils.ConvertMoney(), nil)
+	})
 
-	_, _, err = client.Statuses.Update(utils.RunCronJobs(), nil)
 	if err != nil {
 		fmt.Printf("err : %v\n", err)
 	}

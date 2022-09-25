@@ -8,32 +8,30 @@ import (
 	"os"
 	"strconv"
 	"time"
-
-	"github.com/go-co-op/gocron"
 )
 
 type CurrencyConvert struct {
 	Result float64 `json:"result"`
 }
 
-func RunCronJobs() {
-	s := gocron.NewScheduler(time.UTC)
+// func RunCronJobs()  {
+// 	s := gocron.NewScheduler(time.UTC)
 
-	s.Every(1).Day().Do(func() {
-		convertMoney()
-	})
+// 	s.Every(1).Day().Do(func() {
+// 		convertMoney()
+// 	})
 
-	s.StartBlocking()
-}
+// 	s.StartBlocking()
+// }
 
-func convertMoney() string {
+func ConvertMoney() string {
 	apiKey := os.Getenv("MONEY_API_KEY")
 
-	url := "https://api.apilayer.com/fixer/convert?to=UGX&from=USD&amount=1"
+	url := "https://api.apilayer.com/fixer/convert?to=UGX&from=GBP&amount=1"
 
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", url, nil)
-	request.Header.Set("apikey", string(apiKey))
+	request.Header.Set("apikey", apiKey)
 
 	if err != nil {
 
@@ -57,13 +55,12 @@ func convertMoney() string {
 	}
 
 	convertResultToInt := int(result.Result)
-	convertResultToString := "\n💰 1 USD ............ UGX " + strconv.Itoa(convertResultToInt) + "\n\n"
 
 	currentDate := time.Now()
 	formatDate := currentDate.Format("Mon September, 15:04:05 PM") + "\n"
 	version := LogVersion()
 
-	finalString := formatDate + convertResultToString + version
+	finalString := formatDate + "\n💰 1 USD ............ UGX " + strconv.Itoa(convertResultToInt) + "\n\n" + version
 
 	return fmt.Sprintf("%v", finalString)
 
