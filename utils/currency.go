@@ -55,5 +55,4 @@ func ConvertMoney() string {
 	finalString := formatDate + "\n💰 1 USD ............ UGX " + convertResultToString + "\n\n" + version
 
 	return fmt.Sprintf("%v", finalString)
-
 }
