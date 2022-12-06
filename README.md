@@ -2,6 +2,10 @@
 
 A twitter bot that performs currency conversion and automatically makes a tweet every after 24 hours at 11 AM UTC timezone by relying on a cron job.
 
+### TO DO
+
+Add cron jobs to publish tweets automatically at set intervals.
+
 ## Tools
 
 - Golang
