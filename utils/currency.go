@@ -16,8 +16,9 @@ type CurrencyConvert struct {
 
 func ConvertMoney() string {
 	apiKey := os.Getenv("MONEY_API_KEY")
+	apiLink := os.Getenv("MONEY_API_BASE_URL")
 
-	url := "https://api.apilayer.com/currency_data/convert?to=UGX&from=USD&amount=1"
+	url := apiLink + "/currency_data/convert?to=UGX&from=USD&amount=1"
 
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", url, nil)
