@@ -3,7 +3,7 @@ package utils
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"strconv"
@@ -34,7 +34,7 @@ func ConvertMoney() string {
 
 	defer response.Body.Close()
 
-	body, err := ioutil.ReadAll(response.Body)
+	body, err := io.ReadAll(response.Body)
 	if err != nil {
 		panic(err)
 	}
@@ -47,12 +47,11 @@ func ConvertMoney() string {
 
 	convertResultToString := strconv.Itoa(convertResultToInt)
 
-	currentDate := time.Now()
-	formatDate := currentDate.Format("02 January 2006, 15:04:05 PM") + "\n"
+	formattedDate := time.Now().Format("02 January 2006, 15:04:05 PM") + "\n"
 
 	version := LogVersion()
 
-	finalString := formatDate + "\n💰 1 USD ............ UGX " + convertResultToString + "\n\n" + version
+	finalString := formattedDate + "\n💰 1 USD ............ UGX " + convertResultToString + "\n\n" + version
 
 	return fmt.Sprintf("%v", finalString)
 }
