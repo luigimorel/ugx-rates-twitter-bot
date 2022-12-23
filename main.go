@@ -19,6 +19,6 @@ func keepRunning() {
 	for {
 		client.Config()
 
-		time.Sleep(time.Hour.Round(1))
+		time.Sleep(time.Duration(time.Now().Day()))
 	}
 }
