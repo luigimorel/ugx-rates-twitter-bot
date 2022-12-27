@@ -1,6 +1,6 @@
 # Introduction
 
-A twitter bot that performs currency conversion and automatically makes a tweet every after 24 hours at 11 AM UTC timezone by relying on a cron job.
+A twitter bot that performs currency conversion and automatically makes a tweet every after 24 hours by relying on a channel.
 
 <br/>
 
@@ -8,7 +8,7 @@ A twitter bot that performs currency conversion and automatically makes a tweet 
 
 ### TO DO
 
-[x] - Add cron jobs to publish tweets automatically once a day.
+[x] - Add cron jobs to publish tweets automatically once a day.(I used a channel instead)
 
 ## Tools
 
