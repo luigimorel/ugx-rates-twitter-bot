@@ -1,4 +1,4 @@
-package client
+package main
 
 import (
 	"fmt"
@@ -8,7 +8,6 @@ import (
 	"github.com/dghubble/go-twitter/twitter"
 	"github.com/dghubble/oauth1"
 	"github.com/joho/godotenv"
-	"github.com/morelmiles/ugx_rates/utils"
 )
 
 func Config() {
@@ -38,7 +37,7 @@ func Config() {
 
 	fmt.Printf("Account: @%s \n", user.ScreenName)
 
-	_, _, err = client.Statuses.Update(utils.ConvertMoney(), nil)
+	_, _, err = client.Statuses.Update(ConvertMoney(), nil)
 
 	if err != nil {
 		fmt.Printf("err : %v\n", err)

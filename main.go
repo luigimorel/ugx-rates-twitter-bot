@@ -3,22 +3,16 @@ package main
 import (
 	"time"
 
-	"github.com/morelmiles/ugx_rates/client"
+	"github.com/go-co-op/gocron"
 )
 
 func main() {
-	done := make(chan bool)
-
-	go keepRunning()
-
-	<-done
-
+	runCronJob()
 }
 
-func keepRunning() {
-	for {
-		client.Config()
-
-		time.Sleep(time.Duration(time.Now().Day()))
-	}
+func runCronJob() {
+	c := gocron.NewScheduler(time.UTC)
+	c.At("13:00:00").Do(func() {
+		Config()
+	})
 }
