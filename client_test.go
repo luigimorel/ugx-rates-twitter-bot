@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestConfig(t *testing.T) {
+func TestClient(t *testing.T) {
 	// Load .env file
 	err := godotenv.Load()
 	require.NoError(t, err, "Error loading .env file")
